@@ -7,6 +7,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /usr/src/app
 
 COPY package.json  ./
+COPY prisma ./prisma/
 
 RUN npm install
 

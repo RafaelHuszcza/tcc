@@ -1,12 +1,14 @@
-FROM node:20-bullseye  AS base
+FROM node:20-alpine AS base
 
 
 FROM base as dependencies
+RUN apk add --no-cache libc6-compat
+
+RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3
 
 WORKDIR /usr/src/app
 
 COPY package.json  ./
-COPY prisma ./prisma/
 
 RUN npm install
 

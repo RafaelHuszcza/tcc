@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Need" ADD COLUMN     "quantity" INTEGER NOT NULL DEFAULT 0;

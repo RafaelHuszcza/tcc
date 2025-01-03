@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String    @id @default(cuid())
+  email            String    @unique
+  password         String
+  name             String?
+  resetTokenExpiry DateTime?
+  resetToken       String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  managedShelters Shelter[] @relation("ManagerShelters")
+}
+
+model Shelter {
+  id               String        @id @default(cuid())
+  name             String        @unique
+  lat              Float
+  lng              Float
+  capacity         Int           @default(0)
+  currentOccupancy Int           @default(0)
+  address          String
+  phone            String?
+  serviceHours     String?
+  whatsApp         String?
+  description      String?
+  status           ShelterStatus @default(ACTIVE)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  manager   User   @relation("ManagerShelters", fields: [managerId], references: [id])
+  managerId String
+
+  stock           Stock[]     @relation("ShelterStock")
+  shelteredPeople Sheltered[] @relation("ShelterResidents")
+  needs           Need[]      @relation("ShelterNeeds")
+
+  @@index([managerId])
+}
+
+enum ShelterStatus {
+  ACTIVE
+  INACTIVE
+  TEMPORARILY_CLOSED
+}
+
+model Sheltered {
+  id        String    @id @default(cuid())
+  name      String
+  age       Int
+  sex       String
+  entryDate DateTime
+  exitDate  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  shelter   Shelter @relation("ShelterResidents", fields: [shelterId], references: [id])
+  shelterId String
+
+  @@index([shelterId])
+}
+
+model Item {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  stocks Stock[] @relation("ItemStocks")
+  needs  Need[]  @relation("ItemNeeds")
+}
+
+model Stock {
+  id             String    @id @default(cuid())
+  quantity       Int
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  expirationDate DateTime?
+
+  item      Item    @relation("ItemStocks", fields: [itemId], references: [id])
+  itemId    String
+  shelter   Shelter @relation("ShelterStock", fields: [shelterId], references: [id])
+  shelterId String
+
+  @@index([itemId, shelterId])
+}
+
+model Need {
+  id          String     @id @default(cuid())
+  description String
+  status      NeedStatus @default(PENDING)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  quantity    Int        @default(0)
+  item        Item       @relation("ItemNeeds", fields: [itemId], references: [id])
+  itemId      String
+  shelter     Shelter    @relation("ShelterNeeds", fields: [shelterId], references: [id])
+  shelterId   String
+
+  @@index([itemId, shelterId])
+}
+
+enum NeedStatus {
+  PENDING
+  FULFILLED
+}

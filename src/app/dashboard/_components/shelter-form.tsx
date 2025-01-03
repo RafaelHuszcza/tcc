@@ -33,7 +33,7 @@ interface ShelterForm {
   defaultValues?: GetShelter
 }
 
-export type FormData = z.infer<typeof shelterSchema> & {}
+export type FormData = z.infer<typeof shelterSchema>
 export function ShelterForm({ method, defaultValues }: ShelterForm) {
   const router = useRouter()
 

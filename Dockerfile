@@ -2,7 +2,6 @@ FROM node:20-bullseye  AS base
 
 
 FROM base as dependencies
-RUN apk add --no-cache libc6-compat
 
 WORKDIR /usr/src/app
 

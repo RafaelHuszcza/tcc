@@ -1,5 +1,4 @@
-FROM node:20-alpine3.20 AS base
-
+FROM node:20-alpine AS base
 
 FROM base as dependencies
 RUN apk add --no-cache libc6-compat

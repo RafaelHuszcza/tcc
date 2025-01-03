@@ -1,6 +1,7 @@
 'use client'
 
 import { Table } from '@tanstack/react-table'
+import { X } from 'lucide-react'
 import { useState } from 'react'
 
 import { DataTableFacetedFilter } from '@/components/data-table/data-table-faceted-filter'
@@ -15,8 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-import {  filters, statuses,  } from '../_data/data'
-import { X } from 'lucide-react'
+import { filters, statuses } from '../_data/data'
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -43,7 +43,7 @@ export function DataTableToolbar<TData>({
           defaultValue={filter}
           onValueChange={(e: string) => setFilter(e)}
         >
-          <SelectTrigger className="h-8 w-48 bg-background ">
+          <SelectTrigger className="h-8 w-48 bg-background">
             <SelectValue placeholder="Selecione o filtro" />
           </SelectTrigger>
           <SelectContent>

@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 
-import { prisma } from '@/services/database'
 import { auth } from '@/services/auth'
-import { ShelterStatus } from '@prisma/client'
+import { prisma } from '@/services/database'
+
 import { shelterSchema } from './schema'
 
 export async function GET() {

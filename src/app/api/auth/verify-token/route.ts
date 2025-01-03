@@ -7,10 +7,7 @@ export async function POST(request: Request) {
   try {
     const { token } = await request.json()
     if (!token) {
-      return NextResponse.json(
-        { message: 'Token not found.' },
-        { status: 400 },
-      )
+      return NextResponse.json({ message: 'Token not found.' }, { status: 400 })
     }
 
     const hashedToken = createHash('sha256').update(token).digest('hex')

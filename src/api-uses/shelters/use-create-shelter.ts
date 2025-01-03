@@ -2,12 +2,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
-import { apiClient } from '../api-client'
 import { API_ROUTES } from '@/utils/constants'
+
+import { apiClient } from '../api-client'
 import { sheltersQueryKeys } from './shelters-query-keys'
 import { PostShelter } from './type'
 
-const createShelterFn = async (newShelter:Partial<PostShelter>) => {
+const createShelterFn = async (newShelter: Partial<PostShelter>) => {
   const response = await apiClient.post(`${API_ROUTES.SHELTERS}`, newShelter)
   return response.data
 }
@@ -20,7 +21,7 @@ export function useCreateShelter() {
     onMutate: async () => {
       await queryClient.cancelQueries({ queryKey: sheltersQueryKeys.all })
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success('Abrigo', {
         description: 'Abrigo criado com sucesso',
       })

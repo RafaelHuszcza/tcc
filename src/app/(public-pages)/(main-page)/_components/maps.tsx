@@ -1,13 +1,16 @@
 'use client'
 
 import 'leaflet/dist/leaflet.css'
+
 import L, { LatLngExpression } from 'leaflet'
-import { MapContainer, TileLayer, Marker,Popup } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+
 import { usePublicShelters } from '@/api-uses/public-shelters'
+
 import { ShelterPopup } from './shelter-popup'
 const Map = () => {
-  const {data: shelters } = usePublicShelters()
-  const coord : LatLngExpression = [-32.0453936, -52.1160472]
+  const { data: shelters } = usePublicShelters()
+  const coord: LatLngExpression = [-32.0453936, -52.1160472]
 
   function getIcon(color: string) {
     return new L.Icon({
@@ -36,11 +39,11 @@ const Map = () => {
         {shelters?.map((shelter) => {
           return (
             <Marker
-            icon={ShelterIcon}
-            key={shelter.id}
-            position={[shelter.lat, shelter.lng]}
-          >
-             <Popup >
+              icon={ShelterIcon}
+              key={shelter.id}
+              position={[shelter.lat, shelter.lng]}
+            >
+              <Popup>
                 <ShelterPopup shelter={shelter} />
               </Popup>
             </Marker>

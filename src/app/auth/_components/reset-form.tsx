@@ -118,7 +118,7 @@ export function ResetForm({ token }: ResetFormProps) {
   })
 
   return (
-    <Card className="mx-auto h-auto w-full max-w-[90%] border-2   border-primary sm:max-w-[30rem]">
+    <Card className="mx-auto h-auto w-full max-w-[90%] border-2 border-primary sm:max-w-[30rem]">
       <CardHeader className="space-y-1">
         <CardTitle className="text-center text-2xl font-bold">
           Criar Nova Senha

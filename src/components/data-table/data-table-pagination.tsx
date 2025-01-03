@@ -18,19 +18,19 @@ export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
   return (
-    <div className="flex w-full items-center justify-between space-x-2 overflow-auto border-t-2  border-primary bg-background px-8 py-4 text-sm font-medium">
-      <div className="hidden flex-1 items-center  gap-2 md:flex">
+    <div className="flex w-full items-center justify-between space-x-2 overflow-auto border-t-2 border-primary bg-background px-8 py-4 text-sm font-medium">
+      <div className="hidden flex-1 items-center gap-2 md:flex">
         <Label htmlFor="page">Ir para página:</Label>
         <Input
           className="w-16"
           id="page"
           type="number"
           value={table.getState().pagination.pageIndex + 1}
-          disabled={ table.getPageCount() <= 1}
+          disabled={table.getPageCount() <= 1}
           onChange={(e) => {
             const page = e.target.value ? Number(e.target.value) - 1 : 0
             if (page >= 0 && page < table.getPageCount())
-            table.setPageIndex(page)
+              table.setPageIndex(page)
           }}
         />
       </div>

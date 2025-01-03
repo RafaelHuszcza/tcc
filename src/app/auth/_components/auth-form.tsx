@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LoaderCircle } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -14,7 +15,6 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import {  useRouter } from 'next/navigation'
 export function AuthForm() {
   const router = useRouter()
   const formSchema = z.object({
@@ -43,7 +43,7 @@ export function AuthForm() {
   } = form
 
   const onSubmit = handleSubmit(async (data: FormData) => {
-    const response = await signIn('credentials', { ...data, redirect:false})
+    const response = await signIn('credentials', { ...data, redirect: false })
     console.log(response)
     if (response?.error) {
       toast.error('Login', {
@@ -58,7 +58,7 @@ export function AuthForm() {
   })
 
   return (
-    <Card className="mx-auto h-auto w-full max-w-[90%] border-2  border-primary sm:max-w-[30rem]">
+    <Card className="mx-auto h-auto w-full max-w-[90%] border-2 border-primary sm:max-w-[30rem]">
       <CardHeader className="space-y-1">
         <CardTitle className="text-center text-2xl font-bold">Login</CardTitle>
       </CardHeader>

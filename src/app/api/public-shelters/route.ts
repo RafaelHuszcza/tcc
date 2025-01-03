@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+
 import { prisma } from '@/services/database'
 
 export async function GET() {
@@ -10,4 +11,3 @@ export async function GET() {
     return NextResponse.json({ message: 'Server Error' }, { status: 500 })
   }
 }
-

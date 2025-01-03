@@ -1,13 +1,13 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
+import { BadgeCheck, ClockAlert } from 'lucide-react'
 
+import { PublicNeed } from '@/api-uses/public-needs/type'
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
+import { cn } from '@/lib/utils'
 
 import { DataTableRowActions } from './data-table-row-actions'
-import { cn } from '@/lib/utils'
-import { BadgeCheck, ClockAlert } from 'lucide-react'
-import { PublicNeed } from '@/api-uses/public-needs/type'
 
 export const columns: ColumnDef<PublicNeed>[] = [
   {
@@ -55,7 +55,7 @@ export const columns: ColumnDef<PublicNeed>[] = [
         <div className="flex justify-center font-medium">
           <StatusIcon
             className={cn(
-              'h-4 w-4 ',
+              'h-4 w-4',
               row.getValue('status') === 'FULFILLED'
                 ? 'text-green-500'
                 : 'text-destructive',
@@ -93,11 +93,7 @@ export const columns: ColumnDef<PublicNeed>[] = [
     ),
     cell: ({ row }) => {
       const date = new Date(row.getValue('createdAt')).toLocaleDateString()
-      return (
-        <div className="px-1 text-center font-medium">
-          {date}
-        </div>
-      )
+      return <div className="px-1 text-center font-medium">{date}</div>
     },
     enableSorting: true,
     enableHiding: false,

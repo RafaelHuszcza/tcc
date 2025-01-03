@@ -2,12 +2,11 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 
+import { GetShelter } from '@/api-uses/shelters/type'
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
-
+import { formatDate } from '@/utils/formatDate'
 
 import { DataTableRowActions } from './data-table-row-actions'
-import { GetShelter } from '@/api-uses/shelters/type'
-import { formatDate } from '@/utils/formatDate'
 
 export const columns: ColumnDef<GetShelter>[] = [
   {
@@ -64,7 +63,9 @@ export const columns: ColumnDef<GetShelter>[] = [
     cell: ({ row }) => {
       return (
         <div className="px-1 text-center font-medium">
-          {row.getValue('updatedAt') ? formatDate(row.getValue('updatedAt')) : 'Sem data'}
+          {row.getValue('updatedAt')
+            ? formatDate(row.getValue('updatedAt'))
+            : 'Sem data'}
         </div>
       )
     },

@@ -2,9 +2,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
+import { API_ROUTES } from '@/utils/constants'
+
 import { apiClient } from '../api-client'
 import { sheltersQueryKeys } from './shelters-query-keys'
-import { API_ROUTES } from '@/utils/constants'
 export function useDeleteShelter() {
   const queryClient = useQueryClient()
   const deleteShelterFn = async (id: string) => {

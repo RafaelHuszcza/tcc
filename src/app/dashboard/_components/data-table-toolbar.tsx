@@ -5,7 +5,6 @@ import { PlusCircle, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import { DataTableViewOptions } from '@/components/data-table/data-table-view-options'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -44,7 +43,7 @@ export function DataTableToolbar<TData>({
           defaultValue={filter}
           onValueChange={(e: string) => setFilter(e)}
         >
-          <SelectTrigger className="h-8 w-48 bg-background ">
+          <SelectTrigger className="h-8 w-48 bg-background">
             <SelectValue placeholder="Selecione o filtro" />
           </SelectTrigger>
           <SelectContent>

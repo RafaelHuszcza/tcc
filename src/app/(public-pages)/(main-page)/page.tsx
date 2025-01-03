@@ -6,7 +6,7 @@ export default function Page() {
   })
   return (
     <main className="h-[calc(100vh-5rem)] w-full">
-      <DynamicMap/>
+      <DynamicMap />
     </main>
-  );
+  )
 }

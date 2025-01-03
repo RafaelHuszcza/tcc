@@ -1,12 +1,14 @@
-"use client"
-import { useShelter } from '@/api-uses/shelters'
+'use client'
 import { useRouter } from 'next/navigation'
+
+import { useShelter } from '@/api-uses/shelters'
+
 import { HeaderSidebar } from '../../../_components/header-sidebar'
 import { ShelterForm } from '../../../_components/shelter-form'
 export default function Page({ params }: { params: { id: string } }) {
   const { id } = params
   const router = useRouter()
-  const { data: shelter,  isLoading, isSuccess, isError } = useShelter(id)
+  const { data: shelter, isLoading, isSuccess, isError } = useShelter(id)
   if (isLoading || !isSuccess) {
     return <div>Carregando...</div>
   }
@@ -15,8 +17,8 @@ export default function Page({ params }: { params: { id: string } }) {
   }
   return (
     <>
-    <HeaderSidebar  pageName='Dados do Abrigo' shelterName={shelter.name} />
-    <ShelterForm method="PUT" defaultValues={shelter} />
+      <HeaderSidebar pageName="Dados do Abrigo" shelterName={shelter.name} />
+      <ShelterForm method="PUT" defaultValues={shelter} />
     </>
   )
 }

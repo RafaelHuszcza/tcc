@@ -1,5 +1,4 @@
-import { API_ROUTES } from "@/utils/constants";
-
+import { API_ROUTES } from '@/utils/constants'
 
 export const sheltersQueryKeys = {
   all: [API_ROUTES.SHELTERS],

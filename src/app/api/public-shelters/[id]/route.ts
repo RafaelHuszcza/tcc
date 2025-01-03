@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/services/database'
 
+import { prisma } from '@/services/database'
 
 export async function GET(
   request: NextRequest,
@@ -8,12 +8,9 @@ export async function GET(
 ) {
   const shelterID = params.id
   if (!shelterID) {
-    return new NextResponse(
-      JSON.stringify({ error: 'Shelter Not Found' }),
-      {
-        status: 404,
-      },
-    )
+    return new NextResponse(JSON.stringify({ error: 'Shelter Not Found' }), {
+      status: 404,
+    })
   }
 
   const shelter = await prisma.shelter.findFirst({
@@ -21,11 +18,10 @@ export async function GET(
   })
 
   if (!shelter) {
-    return new NextResponse(
-      JSON.stringify({ error: 'Shelter Not Found' }),
-      { status: 404 },
-    )
+    return new NextResponse(JSON.stringify({ error: 'Shelter Not Found' }), {
+      status: 404,
+    })
   }
-  
+
   return NextResponse.json(shelter)
 }

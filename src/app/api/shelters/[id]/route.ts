@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
-import { prisma } from '@/services/database'
 import { auth } from '@/services/auth'
-import { ShelterStatus } from '@prisma/client'
+import { prisma } from '@/services/database'
+
 import { shelterSchema } from '../schema'
 
 export async function PUT(
@@ -21,14 +21,14 @@ export async function PUT(
   }
   const shelter = await request.json()
   const session = await auth()
-    if (!session) {
-      return new NextResponse(JSON.stringify({ error: 'unauthorized' }), {
-        status: 401,
-      })
-    }
+  if (!session) {
+    return new NextResponse(JSON.stringify({ error: 'unauthorized' }), {
+      status: 401,
+    })
+  }
 
   const shelterDB = await prisma.shelter.findFirst({
-    where: { id: shelterId , managerId: session.user?.id },
+    where: { id: shelterId, managerId: session.user?.id },
   })
   if (!shelterDB) {
     return new NextResponse(
@@ -86,7 +86,7 @@ export async function DELETE(
   }
 
   await prisma.shelter.delete({
-    where: { id: shelterId , managerId: session.user?.id },
+    where: { id: shelterId, managerId: session.user?.id },
   })
 
   return NextResponse.json({ message: 'Localização deletado com sucesso' })
@@ -114,7 +114,7 @@ export async function GET(
   }
 
   const shelter = await prisma.shelter.findFirst({
-    where: { id: shelterId , managerId: session.user?.id },
+    where: { id: shelterId, managerId: session.user?.id },
   })
 
   if (!shelter) {

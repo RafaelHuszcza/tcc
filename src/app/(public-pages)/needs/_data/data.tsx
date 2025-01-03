@@ -1,7 +1,4 @@
-import {
-  BadgeCheck,
-  ClockAlert
-} from 'lucide-react'
+import { BadgeCheck, ClockAlert } from 'lucide-react'
 
 export const statuses = [
   {
@@ -32,5 +29,5 @@ export const filters = [
   {
     label: 'Data de criação',
     value: 'createdAt',
-  }
+  },
 ]

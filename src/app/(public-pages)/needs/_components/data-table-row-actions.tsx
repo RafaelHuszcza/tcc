@@ -1,7 +1,8 @@
 import { Row } from '@tanstack/react-table'
+import { Ellipsis } from 'lucide-react'
 import Link from 'next/link'
 
-
+import { publicNeedSchema } from '@/api-uses/public-needs/type'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -9,10 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-
-import { Ellipsis } from 'lucide-react'
 import { ROUTES } from '@/utils/constants'
-import { publicNeedSchema } from '@/api-uses/public-needs/type'
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>
@@ -29,16 +27,19 @@ export function DataTableRowActions<TData>({
           variant="ghost"
           className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
         >
-          <Ellipsis  className="h-4 w-4" />
+          <Ellipsis className="h-4 w-4" />
           <span className="sr-only">Abrir Menu</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem>
-            <Link href={`${ROUTES.PUBLIC_NEEDS}/${need.id}`} className="h-full w-full">
+          <Link
+            href={`${ROUTES.PUBLIC_NEEDS}/${need.id}`}
+            className="h-full w-full"
+          >
             Mais detalhes
-            </Link>
-          </DropdownMenuItem>
+          </Link>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

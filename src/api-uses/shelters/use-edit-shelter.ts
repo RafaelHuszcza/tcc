@@ -1,22 +1,22 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useParams } from 'next/navigation'
 import { toast } from 'sonner'
+
+import { API_ROUTES } from '@/utils/constants'
 
 import { apiClient } from '../api-client'
 import { sheltersQueryKeys } from './shelters-query-keys'
-import { API_ROUTES } from '@/utils/constants'
-import { Shelter } from '@prisma/client'
 import { PutShelter } from './type'
-
-
 
 export function useEditShelter() {
   const queryClient = useQueryClient()
 
   const editShelterFn = async (updatedShelter: PutShelter) => {
-    const { id, ...shelterWithoutId } = updatedShelter;
-    const response = await apiClient.put(`${API_ROUTES.SHELTERS}/${id}`, shelterWithoutId)
+    const { id, ...shelterWithoutId } = updatedShelter
+    const response = await apiClient.put(
+      `${API_ROUTES.SHELTERS}/${id}`,
+      shelterWithoutId,
+    )
     return response
   }
 

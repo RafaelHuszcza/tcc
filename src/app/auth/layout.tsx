@@ -1,4 +1,4 @@
-import { Header } from "@/components/header"
+import { Header } from '@/components/header'
 
 export default function Layout({
   children,
@@ -7,11 +7,10 @@ export default function Layout({
 }>) {
   return (
     <div className="flex h-screen w-full flex-col">
-    <Header />
-    <main className="flex flex-1 items-center justify-center">
-      {children}
-    </main>
+      <Header />
+      <main className="flex flex-1 items-center justify-center">
+        {children}
+      </main>
     </div>
-    
   )
 }

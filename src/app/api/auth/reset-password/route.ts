@@ -1,4 +1,4 @@
-import { hash } from 'bcryptjs'
+import { hash } from 'bcrypt'
 import { createHash } from 'crypto'
 import { NextResponse } from 'next/server'
 

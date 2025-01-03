@@ -1,9 +1,9 @@
-import { hash } from 'bcryptjs'
+import { hash } from 'bcrypt'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
-import { prisma } from '@/services/database'
 import { auth } from '@/services/auth'
+import { prisma } from '@/services/database'
 
 export async function PUT(
   request: NextRequest,

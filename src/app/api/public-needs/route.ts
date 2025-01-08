@@ -20,8 +20,11 @@ export async function GET() {
       },
     })
     return NextResponse.json(needs)
-  } catch (e) {
-    console.log({ e })
-    return NextResponse.json({ message: 'Server Error' }, { status: 500 })
+  } catch (error) {
+    console.error('Erro ao buscar necessidades:', error)
+    return NextResponse.json(
+      { error: 'Erro interno do servidor' },
+      { status: 500 },
+    )
   }
 }

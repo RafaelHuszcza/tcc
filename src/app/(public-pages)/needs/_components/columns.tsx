@@ -6,10 +6,43 @@ import { BadgeCheck, ClockAlert } from 'lucide-react'
 import { PublicNeed } from '@/api-uses/public-needs/type'
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
 import { cn } from '@/lib/utils'
+import { formatDate } from '@/utils/formatDate'
 
 import { DataTableRowActions } from './data-table-row-actions'
 
 export const columns: ColumnDef<PublicNeed>[] = [
+  {
+    accessorKey: 'description',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Descrição" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="px-1 text-center font-medium">
+          {row.getValue('Descrição')}
+        </div>
+      )
+    },
+    id: 'Descrição',
+    enableSorting: false,
+    enableHiding: true,
+  },
+  {
+    accessorKey: 'quantity',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Quantidade" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="px-1 text-center font-medium">
+          {row.getValue('quantity')}
+        </div>
+      )
+    },
+    id: 'quantity',
+    enableSorting: true,
+    enableHiding: false,
+  },
   {
     accessorKey: 'item.name',
     header: ({ column }) => (
@@ -27,20 +60,20 @@ export const columns: ColumnDef<PublicNeed>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'description',
+    accessorKey: 'item.description',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Descrição" />
+      <DataTableColumnHeader column={column} title="Descrição do Item" />
     ),
     cell: ({ row }) => {
       return (
         <div className="px-1 text-center font-medium">
-          {row.getValue('Descrição')}
+          {row.getValue('item.description')}
         </div>
       )
     },
-    id: 'Descrição',
+    id: 'item.description',
     enableSorting: false,
-    enableHiding: true,
+    enableHiding: false,
   },
   {
     accessorKey: 'status',
@@ -87,13 +120,18 @@ export const columns: ColumnDef<PublicNeed>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'createdAt',
+    accessorKey: 'updatedAt',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Data de criação" />
+      <DataTableColumnHeader column={column} title="Última atualização" />
     ),
     cell: ({ row }) => {
-      const date = new Date(row.getValue('createdAt')).toLocaleDateString()
-      return <div className="px-1 text-center font-medium">{date}</div>
+      return (
+        <div className="px-1 text-center font-medium">
+          {row.getValue('updatedAt')
+            ? formatDate(row.getValue('updatedAt'))
+            : 'Sem data'}
+        </div>
+      )
     },
     enableSorting: true,
     enableHiding: false,

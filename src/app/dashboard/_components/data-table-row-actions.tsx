@@ -5,7 +5,7 @@ import { Ellipsis } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 import { useDeleteShelter } from '@/api-uses/shelters'
-import { shelterSchema } from '@/app/api/shelters/schema'
+import { getShelterSchema } from '@/api-uses/shelters/type'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -22,7 +22,7 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const shelter = shelterSchema.parse(row.original)
+  const shelter = getShelterSchema.parse(row.original)
   const deleteShelterFnc = useDeleteShelter()
   const deleteShelter = async (id: string) => {
     const isConfirmed = window.confirm(

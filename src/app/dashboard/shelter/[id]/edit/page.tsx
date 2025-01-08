@@ -8,17 +8,20 @@ import { ShelterForm } from '../../../_components/shelter-form'
 export default function Page({ params }: { params: { id: string } }) {
   const { id } = params
   const router = useRouter()
-  const { data: shelter, isLoading, isSuccess, isError } = useShelter(id)
-  if (isLoading || !isSuccess) {
-    return <div>Carregando...</div>
-  }
+  const { data: shelter, isError, isLoading, isSuccess } = useShelter(id)
   if (isError) {
     router.push('/dashboard/')
   }
   return (
     <>
-      <HeaderSidebar pageName="Dados do Abrigo" shelterName={shelter.name} />
-      <ShelterForm method="PUT" defaultValues={shelter} />
+      <HeaderSidebar
+        page={{
+          href: `/dashboard/shelter/${shelter?.id}/edit`,
+          text: 'Dados do Abrigo',
+        }}
+        shelterName={isLoading ? 'Carregando...' : shelter?.name}
+      />
+      {isSuccess && <ShelterForm method="PUT" defaultValues={shelter} />}
     </>
   )
 }

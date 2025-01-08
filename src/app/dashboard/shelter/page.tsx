@@ -4,7 +4,7 @@ import { HeaderSidebar } from '../_components/header-sidebar'
 export default function Page() {
   return (
     <>
-      <HeaderSidebar pageName="Abrigos" />
+      <HeaderSidebar extraText="Abrigos" />
     </>
   )
 }

@@ -25,10 +25,30 @@ import {
 import { NavUser } from './nav-user'
 
 const shelterNavItems = [
-  { title: 'Dados do Abrigo', icon: Info, href: 'edit' },
-  { title: 'Necessidades', icon: Package, href: 'needs' },
-  { title: 'Estoque', icon: SendToBack, href: 'stock' },
-  { title: 'Abrigados', icon: Users, href: 'sheltered' },
+  {
+    title: 'Dados do Abrigo',
+    icon: Info,
+    href: 'edit',
+    fullPath: '/dashboard/shelter/:id/edit',
+  },
+  {
+    title: 'Necessidades',
+    icon: Package,
+    href: 'needs',
+    fullPath: '/dashboard/shelter/:id/needs',
+  },
+  {
+    title: 'Estoque',
+    icon: SendToBack,
+    href: 'stocks',
+    fullPath: '/dashboard/shelter/:id/stocks',
+  },
+  {
+    title: 'Abrigados',
+    icon: Users,
+    href: 'sheltered',
+    fullPath: '/dashboard/shelter/:id/sheltered',
+  },
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -64,7 +84,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">
                   {isInShelterDashboard
-                    ? `Abrigo: ${shelter?.name}`
+                    ? `Abrigo: ${shelter?.name ? shelter.name : 'Carregando...'}`
                     : 'Meus Abrigos'}
                 </span>
               </div>
@@ -141,19 +161,20 @@ function ShelterDashboardMenu({ shelter }: { shelter?: GetShelter }) {
       <SidebarGroupLabel>Menu do Abrigo</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
-          {shelterNavItems.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton
-                isActive={pathname.split('/').at(-1) === item.href}
-                asChild
-              >
-                <Link href={`/dashboard/shelter/${shelter.id}/${item.href}`}>
-                  <item.icon className="mr-2 h-4 w-4" />
-                  {item.title}
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
+          {shelterNavItems.map((item) => {
+            const fullPath = item.fullPath.replace(':id', shelter.id)
+            const isActive = pathname.startsWith(fullPath)
+            return (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton isActive={isActive} asChild>
+                  <Link href={`/dashboard/shelter/${shelter.id}/${item.href}`}>
+                    <item.icon className="mr-2 h-4 w-4" />
+                    {item.title}
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            )
+          })}
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>

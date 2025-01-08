@@ -6,8 +6,11 @@ export async function GET() {
   try {
     const shelters = await prisma.shelter.findMany()
     return NextResponse.json(shelters)
-  } catch (e) {
-    console.log({ e })
-    return NextResponse.json({ message: 'Server Error' }, { status: 500 })
+  } catch (error) {
+    console.error('Erro ao buscar abrigos:', error)
+    return NextResponse.json(
+      { error: 'Erro interno do servidor' },
+      { status: 500 },
+    )
   }
 }

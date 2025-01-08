@@ -15,19 +15,15 @@ export const statuses = [
 
 export const filters = [
   {
-    label: 'Nome do Item',
-    value: 'item.name',
-  },
-  {
     label: 'Descrição',
     value: 'Descrição',
   },
   {
-    label: 'Abrigo',
-    value: 'shelter.name',
+    label: 'Nome do Item',
+    value: 'item.name',
   },
   {
-    label: 'Data de criação',
-    value: 'createdAt',
+    label: 'Abrigo',
+    value: 'shelter.name',
   },
 ]

@@ -1,4 +1,6 @@
 'use client'
+import { useRouter } from 'next/navigation'
+
 import { useShelter } from '@/api-uses/shelters'
 import { HeaderSidebar } from '@/app/dashboard/_components/header-sidebar'
 export default function ShelterDashboardPage({
@@ -6,11 +8,21 @@ export default function ShelterDashboardPage({
 }: {
   params: { id: string }
 }) {
-  const { data: shelter } = useShelter(params.id)
+  const router = useRouter()
+  const { data: shelter, isLoading, isError } = useShelter(params.id)
 
+  if (isError) {
+    router.push('/dashboard/')
+  }
   return (
     <>
-      <HeaderSidebar pageName="Abrigados" shelterName={shelter?.name} />
+      <HeaderSidebar
+        page={{
+          href: `/dashboard/shelter/${shelter?.id}/sheltereds`,
+          text: 'Abrigados',
+        }}
+        shelterName={isLoading ? 'Carregando...' : shelter?.name}
+      />
     </>
   )
 }

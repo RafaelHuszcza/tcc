@@ -4,7 +4,6 @@ import { ShelterStatus } from '@/api-uses/shelters/type'
 
 export const shelterSchema = z
   .object({
-    id: z.string(),
     name: z
       .string({ required_error: 'Nome é necessário' })
       .min(1, { message: 'Nome é necessário' }),

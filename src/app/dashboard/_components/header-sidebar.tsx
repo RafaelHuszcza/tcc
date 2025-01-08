@@ -10,11 +10,16 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 export function HeaderSidebar({
-  pageName,
+  page,
   shelterName,
+  extraText,
 }: {
-  pageName?: string
+  page?: {
+    text: string
+    href?: string
+  }
   shelterName?: string
+  extraText?: string
 }) {
   return (
     <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
@@ -26,19 +31,28 @@ export function HeaderSidebar({
             <BreadcrumbItem className="hidden md:block">
               <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
             </BreadcrumbItem>
-            {pageName && (
-              <>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{pageName}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </>
-            )}
+
             {shelterName && (
               <>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
                   <BreadcrumbPage>{shelterName}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </>
+            )}
+            {page && (
+              <>
+                <BreadcrumbSeparator className="hidden md:block" />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href={page.href}>{page.text}</BreadcrumbLink>
+                </BreadcrumbItem>
+              </>
+            )}
+            {extraText && (
+              <>
+                <BreadcrumbSeparator className="hidden md:block" />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>{extraText}</BreadcrumbPage>
                 </BreadcrumbItem>
               </>
             )}

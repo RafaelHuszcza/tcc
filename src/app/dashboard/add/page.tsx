@@ -4,7 +4,7 @@ import { ShelterForm } from '../_components/shelter-form'
 export default function Dashboard() {
   return (
     <>
-      <HeaderSidebar pageName="Criar Abrigo" />
+      <HeaderSidebar extraText="Criar Abrigo" />
       <ShelterForm method="POST" />
     </>
   )

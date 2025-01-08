@@ -6,39 +6,49 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } },
 ) {
-  const needId = params.id
-  if (!needId) {
-    return new NextResponse(JSON.stringify({ error: 'Need Not Found' }), {
-      status: 404,
-    })
-  }
+  try {
+    const needId = params.id
+    if (!needId) {
+      return NextResponse.json(
+        { error: 'ID da necessidade não fornecido' },
+        { status: 400 },
+      )
+    }
 
-  const need = await prisma.need.findFirst({
-    where: { id: needId },
-    include: {
-      item: {
-        select: {
-          name: true,
-          description: true,
+    const need = await prisma.need.findUnique({
+      where: { id: needId },
+      include: {
+        item: {
+          select: {
+            name: true,
+            description: true,
+          },
+        },
+        shelter: {
+          select: {
+            name: true,
+            address: true,
+            phone: true,
+            description: true,
+            serviceHours: true,
+          },
         },
       },
-      shelter: {
-        select: {
-          name: true,
-          address: true,
-          phone: true,
-          description: true,
-          serviceHours: true,
-        },
-      },
-    },
-  })
-
-  if (!need) {
-    return new NextResponse(JSON.stringify({ error: 'Need Not Found' }), {
-      status: 404,
     })
-  }
 
-  return NextResponse.json(need)
+    if (!need) {
+      return NextResponse.json(
+        { error: 'Necessidade não encontrada' },
+        { status: 404 },
+      )
+    }
+
+    return NextResponse.json(need)
+  } catch (error) {
+    console.error('Erro ao buscar necessidade:', error)
+    return NextResponse.json(
+      { error: 'Erro interno do servidor' },
+      { status: 500 },
+    )
+  }
 }

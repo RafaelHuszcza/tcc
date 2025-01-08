@@ -53,16 +53,16 @@ enum ShelterStatus {
 }
 
 model Sheltered {
-  id        String    @id @default(cuid())
+  id        String   @id @default(cuid())
   name      String
   age       Int
   sex       String
-  entryDate DateTime
-  exitDate  DateTime?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  entryDate String
+  exitDate  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  shelter   Shelter @relation("ShelterResidents", fields: [shelterId], references: [id])
+  shelter   Shelter @relation("ShelterResidents", fields: [shelterId], references: [id], onDelete: Cascade)
   shelterId String
 
   @@index([shelterId])
@@ -88,7 +88,7 @@ model Stock {
 
   item      Item    @relation("ItemStocks", fields: [itemId], references: [id])
   itemId    String
-  shelter   Shelter @relation("ShelterStock", fields: [shelterId], references: [id])
+  shelter   Shelter @relation("ShelterStock", fields: [shelterId], references: [id], onDelete: Cascade)
   shelterId String
 
   @@index([itemId, shelterId])
@@ -103,7 +103,7 @@ model Need {
   quantity    Int        @default(0)
   item        Item       @relation("ItemNeeds", fields: [itemId], references: [id])
   itemId      String
-  shelter     Shelter    @relation("ShelterNeeds", fields: [shelterId], references: [id])
+  shelter     Shelter    @relation("ShelterNeeds", fields: [shelterId], references: [id], onDelete: Cascade)
   shelterId   String
 
   @@index([itemId, shelterId])

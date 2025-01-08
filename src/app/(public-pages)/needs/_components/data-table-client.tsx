@@ -9,6 +9,7 @@ import { DataTable } from './data-table'
 
 export function DataTableClient() {
   const { data, isLoading, isSuccess, isError } = usePublicNeeds()
+  console.log(data)
   return (
     <div className="container h-full min-w-[32rem] py-10">
       {isLoading && <TableSkeleton />}

@@ -1,9 +1,7 @@
 import { z } from 'zod'
 
-enum NeedStatus {
-  PENDING = 'PENDING',
-  FULFILLED = 'FULFILLED',
-}
+import { NeedStatus } from '../needs/type'
+
 export interface PublicNeed {
   id: string
   description: string
@@ -11,12 +9,35 @@ export interface PublicNeed {
   createdAt: Date
   updatedAt: Date
   itemId: string
+  quantity: number
   shelterId: string
   item: {
     name: string
+    description: string
   }
   shelter: {
     name: string
+  }
+}
+export interface PublicNeedWithItemAndShelter {
+  id: string
+  description: string
+  status: NeedStatus
+  createdAt: Date
+  updatedAt: Date
+  itemId: string
+  quantity: number
+  shelterId: string
+  item: {
+    name: string
+    description: string
+  }
+  shelter: {
+    name: string
+    description: string
+    address: string
+    phone: string
+    serviceHours: string
   }
 }
 
@@ -30,6 +51,7 @@ export const publicNeedSchema = z.object({
   shelterId: z.string(),
   item: z.object({
     name: z.string(),
+    description: z.string(),
   }),
   shelter: z.object({
     name: z.string(),

@@ -40,7 +40,6 @@ export function ShelterForm({ method, defaultValues }: ShelterForm) {
   const form = useForm<FormData>({
     resolver: zodResolver(shelterSchema),
     defaultValues: {
-      id: defaultValues?.id ? defaultValues.id : '',
       name: defaultValues?.name ? defaultValues.name : '',
       lat: defaultValues?.lat ? defaultValues.lat : 0,
       lng: defaultValues?.lng ? defaultValues.lng : 0,
@@ -68,8 +67,9 @@ export function ShelterForm({ method, defaultValues }: ShelterForm) {
   const onSubmit = handleSubmit(async (data: FormData) => {
     try {
       if (method === 'PUT') {
-        await editShelter.mutateAsync(data)
-        router.push(`/dashboard/${data.id}`)
+        if (!defaultValues?.id) throw new Error('Id not found')
+        const dataToSend = { ...data, id: defaultValues.id }
+        await editShelter.mutateAsync(dataToSend)
       }
       if (method === 'POST') {
         const response = await createShelter.mutateAsync(data)
@@ -79,7 +79,6 @@ export function ShelterForm({ method, defaultValues }: ShelterForm) {
       console.log(err)
     }
   })
-
   return (
     <main className="flex w-full flex-1 items-center justify-center">
       <Card className="w-full max-w-4xl">

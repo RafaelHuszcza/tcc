@@ -46,8 +46,8 @@ const shelterNavItems = [
   {
     title: 'Abrigados',
     icon: Users,
-    href: 'sheltered',
-    fullPath: '/dashboard/shelter/:id/sheltered',
+    href: 'sheltereds',
+    fullPath: '/dashboard/shelter/:id/sheltereds',
   },
 ]
 

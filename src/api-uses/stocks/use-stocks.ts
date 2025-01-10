@@ -19,5 +19,6 @@ export function useStocks(id: string | undefined | string[]) {
     queryKey: stocksQueryKeys.all,
     queryFn: () => getStocksFn(),
     placeholderData: keepPreviousData,
+    enabled: !!id,
   })
 }

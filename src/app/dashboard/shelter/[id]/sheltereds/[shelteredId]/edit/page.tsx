@@ -1,20 +1,24 @@
 'use client'
 import { useRouter } from 'next/navigation'
 
+import { useSheltered } from '@/api-uses/sheltereds'
 import { useShelter } from '@/api-uses/shelters'
-import { useStock } from '@/api-uses/stocks'
 import { HeaderSidebar } from '@/app/dashboard/_components/header-sidebar'
 
-import { StockForm } from '../../_components/stock-form'
+import { ShelteredForm } from '../../_components/sheltered-form'
 export default function Page({
   params,
 }: {
-  params: { stockId: string; id: string }
+  params: { shelteredId: string; id: string }
 }) {
-  const { id, stockId } = params
+  const { id, shelteredId } = params
   const router = useRouter()
   const { data: shelter, isError, isLoading } = useShelter(id)
-  const { data: stock, isError: isErrorNeed, isSuccess } = useStock(stockId)
+  const {
+    data: sheltered,
+    isError: isErrorNeed,
+    isSuccess,
+  } = useSheltered(shelteredId)
   if (isError || isErrorNeed) {
     router.push('/dashboard/')
   }
@@ -22,13 +26,13 @@ export default function Page({
     <>
       <HeaderSidebar
         page={{
-          href: `/dashboard/shelter/${shelter?.id}/stocks`,
-          text: 'Estoque do Abrigo',
+          href: `/dashboard/shelter/${shelter?.id}/sheltereds`,
+          text: 'Abrigados',
         }}
         shelterName={isLoading ? 'Carregando...' : shelter?.name}
-        extraText="Editar Item do Estoque"
+        extraText="Editar Abrigado"
       />
-      {isSuccess && <StockForm method="PUT" defaultValues={stock} />}
+      {isSuccess && <ShelteredForm method="PUT" defaultValues={sheltered} />}
     </>
   )
 }

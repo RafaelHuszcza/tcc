@@ -53,14 +53,14 @@ enum ShelterStatus {
 }
 
 model Sheltered {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   name      String
   age       Int
   sex       String
-  entryDate String
-  exitDate  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  entryDate DateTime  @default(now())
+  exitDate  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   shelter   Shelter @relation("ShelterResidents", fields: [shelterId], references: [id], onDelete: Cascade)
   shelterId String

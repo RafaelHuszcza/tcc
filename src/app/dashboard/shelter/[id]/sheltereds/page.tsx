@@ -3,13 +3,11 @@ import { useRouter } from 'next/navigation'
 
 import { useShelter } from '@/api-uses/shelters'
 import { HeaderSidebar } from '@/app/dashboard/_components/header-sidebar'
-export default function ShelterDashboardPage({
-  params,
-}: {
-  params: { id: string }
-}) {
+
+import { DataTableClient } from './_components/data-table-client'
+export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter()
-  const { data: shelter, isLoading, isError } = useShelter(params.id)
+  const { data: shelter, isError, isLoading } = useShelter(params.id)
 
   if (isError) {
     router.push('/dashboard/')
@@ -23,6 +21,9 @@ export default function ShelterDashboardPage({
         }}
         shelterName={isLoading ? 'Carregando...' : shelter?.name}
       />
+      <main className="flex w-full items-center justify-center">
+        <DataTableClient />
+      </main>
     </>
   )
 }

@@ -1,0 +1,18 @@
+name: Deploy via EasyPanel API
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Trigger EasyPanel Deploy
+      run: |
+        curl -X POST http://147.182.232.204:3000/api/deploy/5648509780696a390bd25973fefe21211eb91430635d0ef9

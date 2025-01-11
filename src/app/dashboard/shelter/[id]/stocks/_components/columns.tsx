@@ -26,6 +26,24 @@ export const columns: ColumnDef<GetStock>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: 'item.description',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Descrição do Item" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="px-1 text-center font-medium">
+          {row.getValue('descrição do item')
+            ? row.getValue('descrição do item')
+            : 'Sem descrição'}
+        </div>
+      )
+    },
+    id: 'descrição do item',
+    enableSorting: false,
+    enableHiding: true,
+  },
+  {
     accessorKey: 'quantity',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Quantidade" />

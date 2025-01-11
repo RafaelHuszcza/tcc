@@ -57,7 +57,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [selectedShelterId, setSelectedShelterId] = useState<string | null>(
     null,
   )
-
   const { data: shelters } = useShelters()
   const { data: shelter } = useShelter(selectedShelterId)
 

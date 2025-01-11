@@ -25,7 +25,7 @@ export default function ShelterDashboardPage({
         }}
         shelterName={isLoading ? 'Carregando...' : shelter?.name}
       />
-      <main className="flex w-full items-center justify-center">
+      <main className="flex w-full flex-1 overflow-auto p-4 md:justify-center md:p-0">
         <DataTableClient />
       </main>
     </>

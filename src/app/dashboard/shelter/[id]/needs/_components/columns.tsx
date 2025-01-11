@@ -19,7 +19,9 @@ export const columns: ColumnDef<GetNeed>[] = [
     cell: ({ row }) => {
       return (
         <div className="px-1 text-center font-medium">
-          {row.getValue('Descrição')}
+          {row.getValue('Descrição')
+            ? row.getValue('Descrição')
+            : 'Sem descrição'}
         </div>
       )
     },
@@ -67,13 +69,15 @@ export const columns: ColumnDef<GetNeed>[] = [
     cell: ({ row }) => {
       return (
         <div className="px-1 text-center font-medium">
-          {row.getValue('item.description')}
+          {row.getValue('descrição do item')
+            ? row.getValue('descrição do item')
+            : 'Sem descrição'}
         </div>
       )
     },
-    id: 'item.description',
+    id: 'descrição do item',
     enableSorting: false,
-    enableHiding: false,
+    enableHiding: true,
   },
   {
     accessorKey: 'status',

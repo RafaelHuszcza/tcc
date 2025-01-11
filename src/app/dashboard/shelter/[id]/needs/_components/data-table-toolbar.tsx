@@ -7,6 +7,7 @@ import { useParams } from 'next/navigation'
 import { useState } from 'react'
 
 import { DataTableFacetedFilter } from '@/components/data-table/data-table-faceted-filter'
+import { DataTableViewOptions } from '@/components/data-table/data-table-view-options'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -76,6 +77,7 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
+
       <Button asChild>
         <Link
           className="flex gap-2"
@@ -87,6 +89,7 @@ export function DataTableToolbar<TData>({
           </span>
         </Link>
       </Button>
+      <DataTableViewOptions table={table} />
     </div>
   )
 }

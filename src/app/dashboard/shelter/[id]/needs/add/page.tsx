@@ -23,7 +23,9 @@ export default function Page({ params }: { params: { id: string } }) {
         shelterName={isLoading ? 'Carregando...' : shelter?.name}
         extraText="Adicionar Necessidade"
       />
-      <NeedForm method="POST" />
+      <main className="flex w-full flex-1 overflow-auto p-4 md:justify-center md:p-0">
+        <NeedForm method="POST" />
+      </main>
     </>
   )
 }

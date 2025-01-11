@@ -28,7 +28,9 @@ export default function Page({
         shelterName={isLoading ? 'Carregando...' : shelter?.name}
         extraText="Editar Item do Estoque"
       />
-      {isSuccess && <StockForm method="PUT" defaultValues={stock} />}
+      <main className="flex w-full flex-1 overflow-auto p-4 md:justify-center md:p-0">
+        {isSuccess && <StockForm method="PUT" defaultValues={stock} />}
+      </main>
     </>
   )
 }

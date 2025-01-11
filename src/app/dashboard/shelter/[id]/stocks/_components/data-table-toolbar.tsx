@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
 
+import { DataTableViewOptions } from '@/components/data-table/data-table-view-options'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -78,6 +79,7 @@ export function DataTableToolbar<TData>({
           </span>
         </Link>
       </Button>
+      <DataTableViewOptions table={table} />
     </div>
   )
 }

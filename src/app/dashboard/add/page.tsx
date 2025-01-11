@@ -5,7 +5,9 @@ export default function Dashboard() {
   return (
     <>
       <HeaderSidebar extraText="Criar Abrigo" />
-      <ShelterForm method="POST" />
+      <main className="flex w-full flex-1 overflow-auto p-4 md:justify-center md:p-0">
+        <ShelterForm method="POST" />
+      </main>
     </>
   )
 }

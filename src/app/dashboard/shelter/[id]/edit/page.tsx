@@ -21,7 +21,9 @@ export default function Page({ params }: { params: { id: string } }) {
         }}
         shelterName={isLoading ? 'Carregando...' : shelter?.name}
       />
-      {isSuccess && <ShelterForm method="PUT" defaultValues={shelter} />}
+      <main className="flex w-full flex-1 overflow-auto p-4 md:justify-center md:p-0">
+        {isSuccess && <ShelterForm method="PUT" defaultValues={shelter} />}
+      </main>
     </>
   )
 }

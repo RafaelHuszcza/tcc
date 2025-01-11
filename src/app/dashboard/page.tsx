@@ -6,7 +6,7 @@ export default function Dashboard() {
   return (
     <>
       <HeaderSidebar />
-      <main className="flex w-full items-center justify-center">
+      <main className="flex w-full flex-1 overflow-auto px-4 md:justify-center md:p-0">
         <DataTableClient />
       </main>
     </>

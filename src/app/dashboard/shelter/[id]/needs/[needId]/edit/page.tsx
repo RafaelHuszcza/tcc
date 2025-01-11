@@ -28,7 +28,9 @@ export default function Page({
         shelterName={isLoading ? 'Carregando...' : shelter?.name}
         extraText="Editar Necessidade"
       />
-      {isSuccess && <NeedForm method="PUT" defaultValues={need} />}
+      <main className="flex w-full flex-1 overflow-auto p-4 md:justify-center md:p-0">
+        {isSuccess && <NeedForm method="PUT" defaultValues={need} />}
+      </main>
     </>
   )
 }

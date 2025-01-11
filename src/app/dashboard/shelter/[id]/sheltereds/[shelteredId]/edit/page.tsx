@@ -32,7 +32,9 @@ export default function Page({
         shelterName={isLoading ? 'Carregando...' : shelter?.name}
         extraText="Editar Abrigado"
       />
-      {isSuccess && <ShelteredForm method="PUT" defaultValues={sheltered} />}
+      <main className="flex w-full flex-1 overflow-auto p-4 md:justify-center md:p-0">
+        {isSuccess && <ShelteredForm method="PUT" defaultValues={sheltered} />}
+      </main>
     </>
   )
 }

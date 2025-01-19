@@ -1,5 +1,6 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { toast } from 'sonner'
 
 import { API_ROUTES } from '@/utils/constants'
@@ -29,6 +30,12 @@ export function useCreateShelter() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (err: unknown) => {
       console.error('Error creating new shelter', err)
+      if (err instanceof AxiosError) {
+        toast.error('Abrigo', {
+          description: err.response?.data.error,
+        })
+        return
+      }
       toast.error('Abrigo', {
         description: 'Erro ao criar abrigo',
       })

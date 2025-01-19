@@ -7,7 +7,18 @@ import { Toaster } from '@/components/ui/sonner'
 import { ThemeProvider } from './theme-provider'
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
-  const queryClient = new QueryClient({})
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        staleTime: 10 * 60 * 1000,
+        refetchOnWindowFocus: false,
+        throwOnError: (error) => {
+          return !!error
+        },
+      },
+    },
+  })
 
   return (
     <SessionProvider>

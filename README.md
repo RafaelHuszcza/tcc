@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sistema de Gerenciamento de Abrigos Temporários
 
-## Getting Started
+Este projeto é parte do Trabalho de Conclusão de Curso (TCC) de Rafael Huszcza Machado no curso de Sistemas de Informação da Universidade Federal do Rio Grande (FURG). O sistema foi desenvolvido para gerenciar abrigos temporários no município de Rio Grande, facilitando a organização, a comunicação e a alocação de recursos.
 
-First, run the development server:
+## Tecnologias Utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Front-End
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js**: Framework React para construção do front-end.
+- **React-Leaflet**: Biblioteca para renderização de mapas interativos.
+- **ShadCN UI**: Biblioteca para estilização moderna com suporte a temas claro e escuro.
+- **React Hook Form**: Gerenciamento e validação de formulários.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Back-End
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js API Routes**: Implementação de rotas de API no back-end.
+- **Prisma**: ORM para manipulação de dados com PostgreSQL.
+- **PostgreSQL**: Sistema de gerenciamento de banco de dados.
 
-## Learn More
+### Infraestrutura
 
-To learn more about Next.js, take a look at the following resources:
+- **Docker**: Containerização da aplicação para facilitar o desenvolvimento e a implantação.
+- **DigitalOcean**: VPS utilizada para hospedagem do sistema.
+- **Nginx**: Configurado como proxy reverso para orquestração dos serviços.
+- **Cloudflare**: Gerenciamento de DNS e caching.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Funcionalidades Principais
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Mapa Interativo**:
 
-## Deploy on Vercel
+   - Exibe os abrigos cadastrados no sistema com marcadores no mapa.
+   - Cada marcador contém informações detalhadas sobre o abrigo, como capacidade e status.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Autenticação**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   - Implementada com NextAuth.js, utilizando autenticação baseada em credenciais.
+   - Garante a segurança de dados sensíveis e protege as funcionalidades administrativas.
+
+3. **Gerenciamento de Abrigos**:
+
+   - CRUD completo (criação, leitura, atualização e exclusão) de abrigos.
+
+4. **Consulta de Dados**:
+   - Implementação de consultas otimizadas via @tanstack/react-query.
+   - Cache de dados para melhorar o desempenho da aplicação.
+
+## Requisitos para Execução
+
+1. **Pré-requisitos**:
+
+   - Node.js 16+
+   - Docker e Docker Compose
+
+2. **Configuração de Variáveis de Ambiente**:
+   Antes de iniciar, preencha o arquivo `.env` na raiz do projeto com as seguintes variáveis:
+
+   ```env
+   DATABASE_URL=
+   NEXT_PUBLIC_API_URL=
+   NEXTAUTH_URL=
+   NEXTAUTH_SECRET=
+   ```
+
+3. **Instalação**:
+
+   - Clone este repositório:
+     ```bash
+     git clone https://github.com/RafaelHuszcza/tcc.git
+     cd tcc
+     ```
+   - Instale as dependências:
+     ```bash
+     npm install
+     ```
+
+4. **Configuração do Banco de Dados**:
+
+   - Gere os arquivos do Prisma:
+     ```bash
+     npx prisma generate
+     ```
+   - Execute as migrações do banco:
+     ```bash
+     npx prisma migrate dev
+     ```
+
+5. **Execução**:
+   - Para rodar localmente:
+     ```bash
+     npm run dev
+     ```
+   - Para executar com Docker:
+     ```bash
+     docker-compose up
+     ```
+
+## Deploy
+
+O sistema está atualmente hospedado em: [tcc.rafaelhuszcza.com](https://tcc.rafaelhuszcza.com)
+
+## Contribuição
+
+Contribuições são bem-vindas! Para contribuir:
+
+1. Faça um fork do repositório.
+2. Crie uma branch para sua feature:
+   ```bash
+   git checkout -b minha-feature
+   ```
+3. Faça um commit com suas alterações:
+   ```bash
+   git commit -m 'Minha nova feature'
+   ```
+4. Envie as alterações:
+   ```bash
+   git push origin minha-feature
+   ```
+5. Abra um Pull Request no repositório original.
+
+## Licença
+
+Este projeto está licenciado sob os termos da licença MIT. Consulte o arquivo `LICENSE` para mais informações.
+
+## Contato
+
+Para mais informações sobre este projeto, entre em contato com o autor:
+
+- **Rafael Huszcza Machado**
+- Email: [rafaelhuszcza@gmail.com](mailto:rafaelhuszcza@gmail.com)
+- GitHub: [RafaelHuszcza](https://github.com/RafaelHuszcza)

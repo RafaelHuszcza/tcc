@@ -15,4 +15,4 @@ jobs:
 
     - name: Trigger EasyPanel Deploy
       run: |
-        curl -X POST http://147.182.232.204:3000/api/deploy/5648509780696a390bd25973fefe21211eb91430635d0ef9
+        curl -X POST ${{ secrets.EASYPANEL_API_URL }}

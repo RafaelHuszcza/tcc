@@ -21,7 +21,6 @@ Este projeto é parte do Trabalho de Conclusão de Curso (TCC) de Rafael Huszcza
 
 - **Docker**: Containerização da aplicação para facilitar o desenvolvimento e a implantação.
 - **DigitalOcean**: VPS utilizada para hospedagem do sistema.
-- **Nginx**: Configurado como proxy reverso para orquestração dos serviços.
 - **Cloudflare**: Gerenciamento de DNS e caching.
 
 ## Funcionalidades Principais
@@ -55,10 +54,10 @@ Este projeto é parte do Trabalho de Conclusão de Curso (TCC) de Rafael Huszcza
    Antes de iniciar, preencha o arquivo `.env` na raiz do projeto com as seguintes variáveis:
 
    ```env
-   DATABASE_URL=
-   NEXT_PUBLIC_API_URL=
-   NEXTAUTH_URL=
-   NEXTAUTH_SECRET=
+   DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+   NEXT_PUBLIC_API_URL=https://tcc.rafaelhuszcza.com/api
+   NEXTAUTH_URL=https://tcc.rafaelhuszcza.com
+   NEXTAUTH_SECRET=um-segredo-seguro
    ```
 
 3. **Instalação**:
